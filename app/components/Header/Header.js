@@ -64,14 +64,14 @@ function Header() {
               </span>
             </button>
             {clicked && (
-              <div className="absolute bg-white mt-5 rounded-2xl">
-                <div className="py-4 hover:bg-slate-200 px-6 flex items-center justify-between gap-4">
+              <div className="absolute bg-white mt-5 rounded-2xl z-40">
+                <div className="py-4 hover:bg-slate-200 hover:rounded-t-2xl px-6 flex items-center justify-between gap-4">
                   <h1 className="font-semibold">Add new address</h1>
                   <span className="text-2xl">
                     <IoMdAdd />
                   </span>
                 </div>
-                <div className="py-4 hover:bg-slate-200 px-6 gap-4 flex items-center justify-between">
+                <div className="py-4 hover:bg-slate-200 hover:rounded-b-2xl  px-6 gap-4 flex items-center justify-between">
                   <p className="">Al-Farabi Avenue, 156</p>
 
                   <span className="text-lg text-gray-500">

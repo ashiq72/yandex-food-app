@@ -6,6 +6,7 @@ import { RiStarFill } from "react-icons/ri";
 import Image from "next/image";
 import product from "../../../../productData.json";
 import ProductCard from "../../ProductCard/ProductCard";
+import { GiPikeman } from "react-icons/gi";
 
 function HomeProducts() {
   return (
@@ -37,7 +38,16 @@ function HomeProducts() {
         <div className="absolute top-52 left-12 h-full w-full flex flex-col gap-4">
           <h1 className="text-white font-extrabold text-5xl">KFC</h1>
           <div className="flex gap-2">
-            <div className="flex items-center bg-gray-200 rounded-lg px-4 justify-center gap-3 py-1">
+            <div className="flex items-center bg-gray-200 rounded-xl px-4 justify-center gap-3 py-2">
+              <span className="text-3xl">
+                <GiPikeman />
+              </span>
+              <div className="">
+                <h2 className="font-semibold text-xl">by 17:30</h2>
+                <h2 className="-mt-2 font-light">Today</h2>
+              </div>
+            </div>
+            <div className="flex items-center bg-gray-200 rounded-xl px-4 justify-center gap-3 py-2">
               <span className="text-2xl">
                 <RiStarFill />
               </span>
@@ -46,7 +56,7 @@ function HomeProducts() {
                 <h2 className="-mt-2 font-light">200+</h2>
               </div>
             </div>
-            <div className="bg-gray-200 rounded-xl px-4 py-1 flex items-center justify-center">
+            <div className="bg-gray-200 rounded-xl px-4 py-2 flex items-center justify-center">
               <span className="text-3xl">
                 <GoInfo />
               </span>
@@ -75,10 +85,10 @@ function HomeProducts() {
         <div>
           {product.data.map((item, i) => (
             <div key={i}>
-              <div>
+              <div id={item.id}>
                 <h1 className="font-bold text-3xl">{item.category}</h1>
               </div>
-              <div className="flex gap-2 pt-6 pb-10">
+              <div className="flex gap-2 pt-6 pb-10 flex-wrap">
                 {item.category_item.map((product, index) => (
                   <ProductCard key={index} product={product} />
                 ))}
