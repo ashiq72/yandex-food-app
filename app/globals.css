@@ -5,3 +5,8 @@
 body {
   @apply bg-gray-100;
 }
+.linner {
+  background: linear-gradient(90deg, #1fd8b6, #12badf, #c5018e);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
