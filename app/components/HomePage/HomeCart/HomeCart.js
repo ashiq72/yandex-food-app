@@ -7,14 +7,20 @@ import CartItem from "./CartItem";
 
 function HomeCart() {
   const { loading, cartItems } = useSelector((state) => state.cart);
+
+  const sumOfOriginalPrice = cartItems.reduce(
+    (total, product) => total + product.price,
+    0
+  );
+  const totalPrice = sumOfOriginalPrice + 149;
   return (
     <div className="bg-white w-[490px] h-[800px] rounded-2xl hidden xl:block relative">
       <div>
         <div className="p-6 w-full flex items-center justify-between">
           <h1 className="text-2xl font-semibold font-sans">Cart </h1>
-          {cartItems.length && (
+          {cartItems.length ? (
             <h1 className="text-base text-gray-500 font-sans">Clear </h1>
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -40,7 +46,7 @@ function HomeCart() {
             <div className="flex flex-col gap-y-4 px-3 border-b pb-5">
               {cartItems.map((item, index) => (
                 <CartItem
-                  key={item._id}
+                  key={item.id}
                   product={item}
                   index={index}
                   cartItems={cartItems}
@@ -75,7 +81,7 @@ function HomeCart() {
         </div>
         <div className="border-t flex items-center justify-between gap-2 py-3 px-3 rounded-2xl bg-[#FCE000] mt-4">
           <h1 className="font-semibold">Yes, go to checkout</h1>
-          <h1 className="font-semibold text-2xl">149₸</h1>
+          <h1 className="font-semibold text-2xl">{totalPrice}₸</h1>
         </div>
       </div>
     </div>

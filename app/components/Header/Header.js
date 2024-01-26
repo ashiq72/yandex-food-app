@@ -8,12 +8,21 @@ import { IoIosBasket } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 import { GiCheckMark } from "react-icons/gi";
+import { useSelector } from "react-redux";
 
 function Header() {
   const [clicked, setClicked] = useState(false);
   const locationMenuHandle = () => {
     setClicked(!clicked);
   };
+
+  const { loading, cartItems } = useSelector((state) => state.cart);
+
+  const sumOfOriginalPrice = cartItems.reduce(
+    (total, product) => total + product.price,
+    0
+  );
+  const totalPrice = sumOfOriginalPrice + 149;
   return (
     <div className="px-6">
       <div className="border-b border-gray-300 flex justify-between py-4">
@@ -93,12 +102,17 @@ function Header() {
           </div>
           {/* Order and Avator */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center bg-yellow-300 w-fit py-3 px-4 rounded-2xl gap-1">
-              <span className="text-2xl">
-                <IoIosBasket />
-              </span>
-              <span className="text-gray-900 font-semibold">2180₸</span>
-            </div>
+            {cartItems.length ? (
+              <div className="flex items-center bg-yellow-300 w-fit py-3 px-4 rounded-2xl gap-1">
+                <span className="text-2xl">
+                  <IoIosBasket />
+                </span>
+                <span className="text-gray-900 font-semibold">
+                  {totalPrice}₸
+                </span>
+              </div>
+            ) : null}
+
             <div>
               <Image
                 src="https://i.postimg.cc/W1dv6wKb/avator.png"

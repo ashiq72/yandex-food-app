@@ -48,7 +48,7 @@ function HomeSidebar() {
             to={item.id}
             smooth={true}
             duration={700}
-            className={`hover:bg-white rounded-2xl py-4 cursor-pointer flex flex-col ${
+            className={`hover:bg-gray-50 rounded-2xl py-4 cursor-pointer flex flex-col ${
               activeLink === item.id ? "bg-white" : ""
             }`}
             onClick={() => handleLinkClick(item.id)}

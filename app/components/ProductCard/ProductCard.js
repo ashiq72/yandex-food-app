@@ -1,6 +1,9 @@
-import { addToCart } from "@/store/features/cartSlice/cartSlice";
+import {
+  addToCart,
+  handleIncrement,
+} from "@/store/features/cartSlice/cartSlice";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +12,13 @@ function ProductCard({ product }) {
 
   const cartSelected = cartItems.find((item) => item.id === product.id);
   const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
+
+  const addToCartHandler = () => {
+    let newQty = qty;
+    dispatch(addToCart({ ...product, qty: newQty }));
+  };
+  const existItem = cartItems.find((x) => x.id === product.id);
 
   return (
     <div
@@ -27,11 +37,16 @@ function ProductCard({ product }) {
         {cartSelected ? (
           <duv className="bg-neutral-100 h-fit flex items-center justify-between px-4 py-2 rounded-3xl">
             <button className="text-xl">-</button>
-            <button>1</button>
-            <button className="text-xl">+</button>
+            <button>{existItem.qty}</button>
+            <button
+              onClick={() => dispatch(handleIncrement(product.id))}
+              className="text-xl"
+            >
+              +
+            </button>
           </duv>
         ) : (
-          <div onClick={() => dispatch(addToCart(product))}>
+          <div onClick={addToCartHandler}>
             {product.status === "in-stock" ? (
               <button className="flex items-center bg-gray-100 w-full rounded-xl justify-center py-2 gap-2 ">
                 <span>

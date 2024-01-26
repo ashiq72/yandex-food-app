@@ -41,12 +41,12 @@ export const cartSlice = createSlice({
     },
 
     handleIncrement: (state, action) => {
-      const item = action.payload; //_id
+      const item = action.payload; // id
 
       const existItem = state.cartItems.find((x) => x.id === item);
-      if (existItem && existItem.qty <= 9) {
-        const unitPrice = parseFloat(existItem.orginalPrice);
-        existItem.orginalPrice =
+      if (existItem && existItem.qty) {
+        const unitPrice = parseFloat(existItem.price);
+        existItem.price =
           (unitPrice / existItem.qty) * (existItem.qty += 1).toFixed(2);
         Cookies.set("cart_food", JSON.stringify(state));
       }
@@ -55,15 +55,19 @@ export const cartSlice = createSlice({
       );
     },
     handleDecrement: (state, action) => {
-      const item = action.payload; //_id
+      const item = action.payload; // id
 
       const existItem = state.cartItems.find((x) => x.id === item);
-      if (existItem && existItem.qty >= 2) {
-        const unitPrice = parseFloat(existItem.orginalPrice);
-        existItem.orginalPrice =
+      if (existItem && existItem.qty) {
+        const unitPrice = parseFloat(existItem.price);
+        existItem.price =
           (unitPrice / existItem.qty) * (existItem.qty -= 1).toFixed(2);
-        Cookies.set("cart_food", JSON.stringify(state));
+        // If qty becomes 0, remove the item from the cartItems array
+        if (existItem.qty === 0) {
+          state.cartItems = state.cartItems.filter((x) => x.id !== item);
+        }
       }
+      Cookies.set("cart_food", JSON.stringify(state));
     },
   },
 });
