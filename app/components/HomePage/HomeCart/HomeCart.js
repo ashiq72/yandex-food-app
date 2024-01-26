@@ -79,10 +79,12 @@ function HomeCart() {
             </span>
           </div>
         </div>
-        <div className="border-t flex items-center justify-between gap-2 py-3 px-3 rounded-2xl bg-[#FCE000] mt-4">
-          <h1 className="font-semibold">Yes, go to checkout</h1>
-          <h1 className="font-semibold text-2xl">{totalPrice}₸</h1>
-        </div>
+        {cartItems.length ? (
+          <div className="border-t flex items-center justify-between gap-2 py-3 px-3 rounded-2xl bg-[#FCE000] mt-4">
+            <h1 className="font-semibold">Yes, go to checkout</h1>
+            <h1 className="font-semibold text-2xl">{totalPrice}₸</h1>
+          </div>
+        ) : null}
       </div>
     </div>
   );

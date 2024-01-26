@@ -1,5 +1,6 @@
 import {
   addToCart,
+  handleDecrement,
   handleIncrement,
 } from "@/store/features/cartSlice/cartSlice";
 import Image from "next/image";
@@ -22,21 +23,34 @@ function ProductCard({ product }) {
 
   return (
     <div
-      className={`bg-white px-3 pb-3 pt-0 w-[220px] h-[360px] rounded-xl flex flex-col justify-between  ${
+      className={`lg:bg-white bg-neutral-100 lg:px-3 pb-3 pt-0 lg:w-[220px] w-auto lg:h-[360px] lg:rounded-xl rounded-2xl flex flex-col justify-between lg:border-none  ${
         product.status === "in-stock" ? "" : "opacity-[0.6]"
       }`}
     >
-      <div className="h-auto">
-        <Image src={product.photoUrl} alt="" width={200} height={200} />
+      <div className="h-auto ">
+        <Image
+          src={product.photoUrl}
+          alt=""
+          width={200}
+          height={200}
+          className="lg:rounded-xl rounded-2xl p-2"
+        />
       </div>
-      <div className="flex flex-col justify-between h-40">
+      <div className="flex flex-col justify-between lg:h-40 px-2 lg:px-0">
         <div>
-          <h1 className="font-semibold text-2xl">{product.price}₸</h1>
-          <h2>{product.name}</h2>
+          <h1 className="font-semibold lg:text-2xl text-lg">
+            {product.price}₸
+          </h1>
+          <h2 className="lg:text-base text-xs">{product.name}</h2>
         </div>
         {cartSelected ? (
-          <duv className="bg-neutral-100 h-fit flex items-center justify-between px-4 py-2 rounded-3xl">
-            <button className="text-xl">-</button>
+          <div className="lg:bg-neutral-100 bg-white lg:h-fit flex items-center justify-between lg:px-4 px-3 lg:py-2 h-9 rounded-3xl mt-4 lg:mt-0">
+            <button
+              onClick={() => dispatch(handleDecrement(product.id))}
+              className="text-xl"
+            >
+              -
+            </button>
             <button>{existItem.qty}</button>
             <button
               onClick={() => dispatch(handleIncrement(product.id))}
@@ -44,22 +58,26 @@ function ProductCard({ product }) {
             >
               +
             </button>
-          </duv>
+          </div>
         ) : (
           <div onClick={addToCartHandler}>
             {product.status === "in-stock" ? (
-              <button className="flex items-center bg-gray-100 w-full rounded-xl justify-center py-2 gap-2 ">
-                <span>
+              <button className="flex items-center lg:bg-neutral-100 bg-white w-full rounded-xl justify-center h-9 lg:h-0 lg:py-2 gap-2 mt-4 lg:mt-0">
+                <span className="">
                   <IoMdAdd />
                 </span>
-                <span className="text-lg text-gray-600">Add</span>
+                <span className="text-lg text-gray-600 hidden lg:block">
+                  Add
+                </span>
               </button>
             ) : (
               <button
                 disabled
-                className="flex items-center bg-gray-100 w-full rounded-xl justify-center py-2 gap-2 "
+                className="flex items-center lg:bg-neutral-100 bg-white w-full rounded-xl justify-center py-2 gap-2 "
               >
-                <span className="text-lg text-gray-400">Available soon</span>
+                <span className="lg:text-lg text-sm text-gray-600 ">
+                  Available soon
+                </span>
               </button>
             )}
           </div>

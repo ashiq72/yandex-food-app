@@ -24,7 +24,7 @@ function Header() {
   );
   const totalPrice = sumOfOriginalPrice + 149;
   return (
-    <div className="px-6">
+    <div className="px-6 hidden lg:block">
       <div className="border-b border-gray-300 flex justify-between py-4">
         {/* first part  */}
         <div className="flex items-center gap-4  border-gray-300 ">
@@ -57,10 +57,9 @@ function Header() {
                 <CgPinAlt />
               </span>
               <span className="font-semibold text-gray-800">
-                {" "}
                 {`Al-Farabi Avenue 156`}
               </span>
-              <span className="text-base pl-2">
+              <div className="text-base pl-2">
                 {clicked ? (
                   <div className="duration-600">
                     <IoIosArrowUp />
@@ -70,7 +69,7 @@ function Header() {
                     <IoIosArrowDown />
                   </div>
                 )}
-              </span>
+              </div>
             </button>
             {clicked && (
               <div className="absolute bg-white mt-5 rounded-2xl z-40">

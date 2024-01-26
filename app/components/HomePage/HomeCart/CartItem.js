@@ -20,11 +20,11 @@ function CartItem({ product, index }) {
       ${index === cartItems.length - 1 ? "" : "border-b pb-1"}
        `}
       >
-        <duv className="w-1/2">
+        <div className="w-1/2">
           <h3 className="text-sm ">{product.name}</h3>
           <h3>{product.price} ₸</h3>
-        </duv>
-        <duv className="bg-neutral-100 w-1/2 h-fit flex items-center justify-between px-2 py-1 rounded-3xl">
+        </div>
+        <div className="bg-neutral-100 w-1/2 h-fit flex items-center justify-between px-2 py-1 rounded-3xl">
           <button
             onClick={() => dispatch(handleDecrement(product.id))}
             className="text-xl"
@@ -38,7 +38,7 @@ function CartItem({ product, index }) {
           >
             +
           </button>
-        </duv>
+        </div>
       </div>
     </div>
   );
