@@ -52,8 +52,8 @@ function Header() {
             <Image
               src="https://i.postimg.cc/SQ9qMRcw/large-logo.png"
               alt="large_logo"
-              height={200}
-              width={200}
+              height={300}
+              width={300}
               className="hidden xl:flex w-auto h-auto"
               priority
             />
@@ -61,8 +61,8 @@ function Header() {
             <Image
               src="https://i.postimg.cc/5NMJqJ3j/small-logo.png"
               alt="large_logo"
-              height={200}
-              width={200}
+              height={300}
+              width={300}
               className="xl:hidden flex w-auto h-auto"
               priority
             />

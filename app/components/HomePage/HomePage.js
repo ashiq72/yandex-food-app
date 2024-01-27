@@ -1,7 +1,4 @@
 "use client";
-
-import { GoInfo } from "react-icons/go";
-import { FaCar } from "react-icons/fa";
 import HomeProducts from "./HomeProducts/HomeProducts";
 import HomeSidebar from "./HomeSidebar/HomeSidebar";
 import HomeCart from "./HomeCart/HomeCart";
