@@ -8,6 +8,7 @@ const nextConfig = {
       "eda.yandex",
     ],
   },
+  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
 };
 
 export default nextConfig;

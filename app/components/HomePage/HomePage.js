@@ -8,9 +8,9 @@ import HomeCart from "./HomeCart/HomeCart";
 
 function HomePage() {
   return (
-    <div className="flex gap-8 lg:w-11/12 mx-auto lg:py-10">
+    <div className="flex gap-8 sm:w-11/12 mx-auto sm:py-10">
       {/* 1. all menu section */}
-      <div className="hidden lg:block w-[390px] sticky">
+      <div className="hidden sm:block w-[390px] sticky">
         <HomeSidebar />
       </div>
 

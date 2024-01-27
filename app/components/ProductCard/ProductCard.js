@@ -23,7 +23,7 @@ function ProductCard({ product }) {
 
   return (
     <div
-      className={`lg:bg-white bg-neutral-100 lg:px-3 pb-3 pt-0 lg:w-[220px] w-auto lg:h-[360px] lg:rounded-xl rounded-2xl flex flex-col justify-between lg:border-none  ${
+      className={`sm:bg-white bg-neutral-100 sm:px-3 sm:pb-3 pb-0 pt-0 sm:w-[220px] w-auto sm:h-[360px] sm:rounded-xl rounded-3xl flex flex-col justify-between sm:border-none  ${
         product.status === "in-stock" ? "" : "opacity-[0.6]"
       }`}
     >
@@ -33,18 +33,18 @@ function ProductCard({ product }) {
           alt=""
           width={200}
           height={200}
-          className="lg:rounded-xl rounded-2xl p-2"
+          className="sm:rounded-xl rounded-3xl p-[6px]"
         />
       </div>
-      <div className="flex flex-col justify-between lg:h-40 px-2 lg:px-0">
-        <div>
-          <h1 className="font-semibold lg:text-2xl text-lg">
+      <div className="flex flex-col justify-between sm:h-40 px-1 sm:px-0">
+        <div className="px-2 sm:px-0">
+          <h1 className="font-semibold sm:text-2xl text-lg">
             {product.price}₸
           </h1>
-          <h2 className="lg:text-base text-xs">{product.name}</h2>
+          <h2 className="sm:text-base text-xs">{product.name}</h2>
         </div>
         {cartSelected ? (
-          <div className="lg:bg-neutral-100 bg-white lg:h-fit flex items-center justify-between lg:px-4 px-3 lg:py-2 h-9 rounded-3xl mt-4 lg:mt-0">
+          <div className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-between sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2">
             <button
               onClick={() => dispatch(handleDecrement(product.id))}
               className="text-xl"
@@ -62,20 +62,20 @@ function ProductCard({ product }) {
         ) : (
           <div onClick={addToCartHandler}>
             {product.status === "in-stock" ? (
-              <button className="flex items-center lg:bg-neutral-100 bg-white w-full rounded-xl justify-center h-9 lg:h-0 lg:py-2 gap-2 mt-4 lg:mt-0">
+              <button className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2  sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full">
                 <span className="">
                   <IoMdAdd />
                 </span>
-                <span className="text-lg text-gray-600 hidden lg:block">
+                <span className="text-lg text-gray-600 hidden sm:block">
                   Add
                 </span>
               </button>
             ) : (
               <button
                 disabled
-                className="flex items-center lg:bg-neutral-100 bg-white w-full rounded-xl justify-center py-2 gap-2 "
+                className="flex items-center sm:bg-[#f5f4f2] bg-white w-full rounded-xl justify-center py-2 gap-2 sm:mb-0 mb-2"
               >
-                <span className="lg:text-lg text-sm text-gray-600 ">
+                <span className="sm:text-lg text-sm text-gray-600 ">
                   Available soon
                 </span>
               </button>

@@ -31,7 +31,7 @@ function HomeSidebar() {
   };
   return (
     <div>
-      <div className="bg-white rounded-xl hidden lg:block">
+      <div className="bg-white rounded-xl hidden sm:block">
         <Link href="/" className="flex items-center px-8 py-3 gap-2">
           <span className="text-xl font-bold">
             <HiOutlineArrowLeft />
@@ -40,8 +40,8 @@ function HomeSidebar() {
         </Link>
       </div>
       {/* Menu  */}
-      <div className="mt-8 hidden lg:block">
-        <div className="px-8 py-2 font-semibold text-xl hidden lg:block">
+      <div className="mt-8 hidden sm:block">
+        <div className="px-8 py-2 font-semibold text-xl hidden sm:block">
           Menu
         </div>
         {itemsCategory.map((item) => (
