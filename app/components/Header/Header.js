@@ -9,7 +9,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 import { GiCheckMark } from "react-icons/gi";
 import { useSelector } from "react-redux";
-import { FaCheck } from "react-icons/fa6";
+import { FaCar, FaCheck } from "react-icons/fa6";
 
 import {
   Popover,
@@ -25,6 +25,8 @@ import {
 } from "@material-tailwind/react";
 import { BsPlus } from "react-icons/bs";
 import Link from "next/link";
+import { GoInfo } from "react-icons/go";
+import CartItem from "../HomePage/HomeCart/CartItem";
 
 function Header() {
   const [clicked, setClicked] = useState(false);
@@ -39,6 +41,7 @@ function Header() {
     0
   );
   const totalPrice = sumOfOriginalPrice + 149;
+
   return (
     <div className="px-6 hidden sm:block">
       <div className="border-b border-gray-300 flex justify-between py-4">
@@ -115,47 +118,6 @@ function Header() {
               </MenuList>
             </Menu>
           </div>
-          {/* <div
-            onClick={locationMenuHandle}
-            className="border-2 border-gray-300 rounded-2xl px-4 py-2 hover:bg-slate-200 duration-300"
-          >
-            <button className="flex items-center relative">
-              <span className="text-3xl">
-                <CgPinAlt />
-              </span>
-              <span className="font-semibold text-gray-800">
-                {`Al-Farabi Avenue 156`}
-              </span>
-              <div className="text-base pl-2">
-                {clicked ? (
-                  <div className="duration-600">
-                    <IoIosArrowUp />
-                  </div>
-                ) : (
-                  <div className="duration-600">
-                    <IoIosArrowDown />
-                  </div>
-                )}
-              </div>
-            </button>
-            {clicked && (
-              <div className="absolute bg-white mt-5 rounded-2xl z-40">
-                <div className="py-4 hover:bg-slate-200 hover:rounded-t-2xl px-6 flex items-center justify-between gap-4">
-                  <h1 className="font-semibold">Add new address</h1>
-                  <span className="text-2xl">
-                    <IoMdAdd />
-                  </span>
-                </div>
-                <div className="py-4 hover:bg-slate-200 hover:rounded-b-2xl  px-6 gap-4 flex items-center justify-between">
-                  <p className="">Al-Farabi Avenue, 156</p>
-
-                  <span className="text-lg text-gray-500">
-                    <GiCheckMark />
-                  </span>
-                </div>
-              </div>
-            )}
-          </div> */}
         </div>
         {/* Secend part  */}
         <div className="flex items-center gap-6 pr-3">
@@ -202,23 +164,103 @@ function Header() {
           {/* Order and Avator */}
           <div className="flex items-center gap-4">
             {cartItems.length ? (
-              <div className="flex items-center bg-yellow-300 w-fit py-3 px-4 rounded-2xl gap-1">
-                <span className="text-2xl">
-                  <IoIosBasket />
-                </span>
-                <span className="text-gray-900 font-semibold">
-                  {totalPrice}₸
-                </span>
-              </div>
+              <Popover placement="bottom-end">
+                <PopoverHandler>
+                  <div className="flex items-center bg-[#FCE000] w-fit py-3 px-4 rounded-2xl gap-1 cursor-pointer">
+                    <span className="text-2xl">
+                      <IoIosBasket />
+                    </span>
+                    <span className="text-gray-900 font-semibold">
+                      {totalPrice}₸
+                    </span>
+                  </div>
+                </PopoverHandler>
+                <PopoverContent className=" w-[400px] h-auto z-50 shadow-2xl rounded-3xl">
+                  <div className=" w-auto  rounded-2xl hidden xl:block ">
+                    {/* ----------------- */}
+                    <div>
+                      <div className="p-6 w-full flex items-center justify-between">
+                        <h1 className="text-2xl font-semibold font-sans">
+                          Cart{" "}
+                        </h1>
+                        {cartItems.length ? (
+                          <h1 className="text-base text-gray-500 font-sans">
+                            Clear{" "}
+                          </h1>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    {/*If there have cart item */}
+
+                    {cartItems.length === 0 ? (
+                      <div className="h-[600px] flex flex-col items-center justify-center">
+                        <Image
+                          src="https://i.postimg.cc/XJnwMSR3/svg.png"
+                          alt=""
+                          height={105}
+                          width={105}
+                        />
+                        <h1 className="font-bold text-2xl text-center pt-6">
+                          Your cart is currently empty
+                        </h1>
+                      </div>
+                    ) : (
+                      <>
+                        {/* CART CONTENT START */}
+                        <div>
+                          {/* CART ITEMS START */}
+                          <div className="flex flex-col gap-y-4 px-3 border-b pb-5">
+                            {cartItems.map((item, index) => (
+                              <CartItem
+                                key={item.id}
+                                product={item}
+                                index={index}
+                                cartItems={cartItems}
+                              />
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between px-3 py-3">
+                            <h1>Service free</h1>
+                            <h1 className="font-semibold">149₸</h1>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {/* Bottom section of cart  */}
+                    <div className=" bottom-4 px-3">
+                      <div className="border-t flex items-center gap-2 pt-5 ">
+                        <div className="bg-gray-100 rounded-xl p-4">
+                          <FaCar />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[12px] font-normal text-green-500 leading-[14px]">
+                            Бесплатная доставка от 1000 ₸ · 45–55 мин
+                          </span>
+                          <span className="text-[13px] text-gray-400">
+                            Подробные условия
+                          </span>
+                        </div>
+                        <div className="p-0">
+                          <span className="">
+                            <GoInfo />
+                          </span>
+                        </div>
+                      </div>
+                      {cartItems.length ? (
+                        <div className="border-t flex items-center justify-between gap-2 py-3 px-3 rounded-2xl bg-[#FCE000] mt-4">
+                          <h1 className="font-semibold">Yes, go to checkout</h1>
+                          <h1 className="font-semibold text-2xl">
+                            {totalPrice}₸
+                          </h1>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             ) : null}
-            {/* <div>
-              <Image
-                src="https://i.postimg.cc/W1dv6wKb/avator.png"
-                alt=""
-                width={37}
-                height={37}
-              />
-            </div> */}
             <Popover placement="bottom-end">
               <PopoverHandler>
                 <Image

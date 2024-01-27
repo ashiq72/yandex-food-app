@@ -4,7 +4,6 @@ import {
   handleDecrement,
   handleIncrement,
 } from "@/store/features/cartSlice/cartSlice";
-import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
@@ -90,7 +89,7 @@ function ProductCard({ product }) {
             )}
           </>
         ) : (
-          <div onClick={addToCartHandler}>
+          <div>
             {product.status === "in-stock" ? (
               <>
                 {product?.subCategory ? (
@@ -109,7 +108,10 @@ function ProductCard({ product }) {
                     </span>
                   </button>
                 ) : (
-                  <button className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2 sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full">
+                  <button
+                    onClick={addToCartHandler}
+                    className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2 sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full"
+                  >
                     <span className="">
                       <IoMdAdd />
                     </span>
@@ -132,7 +134,13 @@ function ProductCard({ product }) {
           </div>
         )}
       </div>
-      <AddedModal open={open} setOpen={setOpen} handleOpen={handleOpen} />
+      <AddedModal
+        open={open}
+        handleOpen={handleOpen}
+        product={product}
+        existItem={existItem}
+        setOpen={setOpen}
+      />
     </div>
   );
 }
