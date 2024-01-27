@@ -1,12 +1,15 @@
+"use client";
 import {
   addToCart,
   handleDecrement,
   handleIncrement,
 } from "@/store/features/cartSlice/cartSlice";
+import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
+import { AddedModal } from "./AddedModal";
 
 function ProductCard({ product }) {
   const { cartItems } = useSelector((state) => state.cart);
@@ -21,9 +24,13 @@ function ProductCard({ product }) {
   };
   const existItem = cartItems.find((x) => x.id === product.id);
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(!open);
+
   return (
     <div
-      className={`sm:bg-white bg-neutral-100 sm:px-3 sm:pb-3 pb-0 pt-0 sm:w-[220px] w-auto sm:h-[360px] sm:rounded-xl rounded-3xl flex flex-col justify-between sm:border-none  ${
+      className={`sm:bg-white bg-gray-100 sm:px-3 sm:pb-3 pb-0 pt-0 sm:w-[220px] w-auto sm:h-[360px] sm:rounded-xl rounded-3xl flex flex-col justify-between sm:border-none  ${
         product.status === "in-stock" ? "" : "opacity-[0.6]"
       }`}
     >
@@ -44,32 +51,74 @@ function ProductCard({ product }) {
           <h2 className="sm:text-base text-xs">{product.name}</h2>
         </div>
         {cartSelected ? (
-          <div className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-between sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2">
-            <button
-              onClick={() => dispatch(handleDecrement(product.id))}
-              className="text-xl"
-            >
-              -
-            </button>
-            <button>{existItem.qty}</button>
-            <button
-              onClick={() => dispatch(handleIncrement(product.id))}
-              className="text-xl"
-            >
-              +
-            </button>
-          </div>
+          <>
+            {product?.subCategory ? (
+              <div
+                onClick={handleOpen}
+                className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-between sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2"
+              >
+                <button
+                  onClick={() => dispatch(handleDecrement(product.id))}
+                  className="text-xl"
+                >
+                  -
+                </button>
+                <button>{existItem.qty}</button>
+                <button
+                  onClick={() => dispatch(handleIncrement(product.id))}
+                  className="text-xl"
+                >
+                  +
+                </button>
+              </div>
+            ) : (
+              <div className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-between sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2">
+                <button
+                  onClick={() => dispatch(handleDecrement(product.id))}
+                  className="text-xl"
+                >
+                  -
+                </button>
+                <button>{existItem.qty}</button>
+                <button
+                  onClick={() => dispatch(handleIncrement(product.id))}
+                  className="text-xl"
+                >
+                  +
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div onClick={addToCartHandler}>
             {product.status === "in-stock" ? (
-              <button className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2  sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full">
-                <span className="">
-                  <IoMdAdd />
-                </span>
-                <span className="text-lg text-gray-600 hidden sm:block">
-                  Add
-                </span>
-              </button>
+              <>
+                {product?.subCategory ? (
+                  // <Button onClick={handleOpen} variant="gradient">
+                  //   Open Dialog
+                  // </Button>
+                  <button
+                    onClick={handleOpen}
+                    className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2 sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full"
+                  >
+                    <span className="">
+                      <IoMdAdd />
+                    </span>
+                    <span className="text-lg text-gray-600 hidden sm:block">
+                      Add
+                    </span>
+                  </button>
+                ) : (
+                  <button className="sm:bg-[#f5f4f2] bg-white sm:h-fit flex items-center justify-center sm:gap-2 sm:px-4 px-3 sm:py-2 h-7 rounded-3xl mt-4 sm:mt-0 mb-2 w-full">
+                    <span className="">
+                      <IoMdAdd />
+                    </span>
+                    <span className="text-lg text-gray-600 hidden sm:block">
+                      Add
+                    </span>
+                  </button>
+                )}
+              </>
             ) : (
               <button
                 disabled
@@ -83,6 +132,7 @@ function ProductCard({ product }) {
           </div>
         )}
       </div>
+      <AddedModal open={open} setOpen={setOpen} handleOpen={handleOpen} />
     </div>
   );
 }

@@ -15,18 +15,16 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Avatar,
-  Button,
   Typography,
   List,
   ListItem,
-  ListItemPrefix,
   Menu,
   MenuHandler,
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
 import { BsPlus } from "react-icons/bs";
+import Link from "next/link";
 
 function Header() {
   const [clicked, setClicked] = useState(false);
@@ -46,7 +44,7 @@ function Header() {
       <div className="border-b border-gray-300 flex justify-between py-4">
         {/* first part  */}
         <div className="flex items-center gap-4  border-gray-300 ">
-          <div>
+          <Link href="/">
             {/* large screen logo  */}
             <Image
               src="https://i.postimg.cc/SQ9qMRcw/large-logo.png"
@@ -65,59 +63,58 @@ function Header() {
               className="xl:hidden flex w-auto h-auto"
               priority
             />
-          </div>
+          </Link>
 
           {/* Location  */}
-          <Menu
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <MenuHandler>
-              <div
-                onClick={locationMenuHandle}
-                className="border-2 border-gray-300 rounded-2xl px-4 py-2 hover:bg-slate-200 duration-300"
-              >
-                <button className="flex items-center relative">
-                  <span className="text-3xl">
-                    <CgPinAlt />
+          <div onMouseDown={locationMenuHandle}>
+            <Menu
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <MenuHandler>
+                <div className="border-2 border-gray-300 rounded-2xl px-4 py-2 hover:bg-slate-200 duration-300">
+                  <button className="flex items-center relative">
+                    <span className="text-3xl">
+                      <CgPinAlt />
+                    </span>
+                    <span className="font-semibold text-gray-800">
+                      {`Al-Farabi Avenue 156`}
+                    </span>
+                    <div className="text-base pl-2">
+                      {clicked ? (
+                        <div className="duration-600">
+                          <IoIosArrowUp />
+                        </div>
+                      ) : (
+                        <div className="duration-600">
+                          <IoIosArrowDown />
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                </div>
+              </MenuHandler>
+              <MenuList className="p-0 rounded-3xl w-[268px]">
+                <MenuItem className="py-4 hover:bg-[#f5f4f2] px-6 flex items-center gap-4">
+                  <h1 className="font-semibold text-gray-800 text-[15px]">
+                    Add new address
+                  </h1>
+                  <span className="text-2xl font-extrabold text-gray-800">
+                    <IoMdAdd />
                   </span>
-                  <span className="font-semibold text-gray-800">
-                    {`Al-Farabi Avenue 156`}
-                  </span>
-                  <div className="text-base pl-2">
-                    {clicked ? (
-                      <div className="duration-600">
-                        <IoIosArrowUp />
-                      </div>
-                    ) : (
-                      <div className="duration-600">
-                        <IoIosArrowDown />
-                      </div>
-                    )}
-                  </div>
-                </button>
-              </div>
-            </MenuHandler>
-            <MenuList className="p-0 rounded-3xl w-[268px]">
-              <MenuItem className="py-4 hover:bg-[#f5f4f2] px-6 flex items-center gap-4">
-                <h1 className="font-semibold text-gray-800 text-[15px]">
-                  Add new address
-                </h1>
-                <span className="text-2xl font-extrabold text-gray-800">
-                  <IoMdAdd />
-                </span>
-              </MenuItem>
-              <MenuItem className="py-4 hover:bg-[#f5f4f2]  px-6 gap-4 flex items-center justify-between">
-                <p className="text-[15px]">Al-Farabi Avenue, 156</p>
+                </MenuItem>
+                <MenuItem className="py-4 hover:bg-[#f5f4f2]  px-6 gap-4 flex items-center justify-between">
+                  <p className="text-[15px]">Al-Farabi Avenue, 156</p>
 
-                <span className="text-base text-gray-500">
-                  <GiCheckMark />
-                </span>
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                  <span className="text-base text-gray-500">
+                    <GiCheckMark />
+                  </span>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
           {/* <div
             onClick={locationMenuHandle}
             className="border-2 border-gray-300 rounded-2xl px-4 py-2 hover:bg-slate-200 duration-300"
@@ -249,12 +246,12 @@ function Header() {
                     height={37}
                   />
                 </div>
-                <List className="flex flex-col gap-2 mt-2">
+                <List className="flex flex-col gap-[14px] mt-2">
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-500"
+                    className="text-initial font-medium text-blue-gray-500 rounded-3xl"
                   >
-                    <ListItem>
+                    <ListItem className="rounded-xl py-3">
                       <div className="flex justify-between">
                         <div>
                           <h1 className="text-black">Join Plus</h1>
@@ -274,33 +271,37 @@ function Header() {
                   </a>
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-800"
+                    className="text-initial font-medium text-blue-gray-800 rounded-3xl"
                   >
-                    <ListItem>My information</ListItem>
+                    <ListItem className="rounded-xl py-3">
+                      My information
+                    </ListItem>
                   </a>
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-800"
+                    className="text-initial font-medium text-blue-gray-800 rounded-3xl"
                   >
-                    <ListItem>My address</ListItem>
+                    <ListItem className="rounded-xl py-3">My address</ListItem>
                   </a>
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-800"
+                    className="text-initial font-medium text-blue-gray-800 rounded-3xl"
                   >
-                    <ListItem>My orders</ListItem>
+                    <ListItem className="rounded-xl py-3">My orders</ListItem>
                   </a>
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-800"
+                    className="text-initial font-medium text-blue-gray-800 rounded-3xl"
                   >
-                    <ListItem>Notifications</ListItem>
+                    <ListItem className="rounded-xl py-3">
+                      Notifications
+                    </ListItem>
                   </a>
                   <a
                     href="#"
-                    className="text-initial font-medium text-blue-gray-800"
+                    className="text-initial font-medium text-blue-gray-800 rounded-3xl"
                   >
-                    <ListItem>Log out</ListItem>
+                    <ListItem className="rounded-xl py-3">Log out</ListItem>
                   </a>
                 </List>
               </PopoverContent>

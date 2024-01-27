@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
 import { RiStarFill } from "react-icons/ri";
@@ -10,8 +10,20 @@ import { GiPikeman } from "react-icons/gi";
 import { BsThreeDots } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { GoArrowLeft } from "react-icons/go";
+import { FaHeart } from "react-icons/fa6";
+
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Typography,
+} from "@material-tailwind/react";
 
 function HomeProducts() {
+  const [clicked, setClicked] = useState(false);
+  const heartHandle = () => {
+    setClicked(!clicked);
+  };
   return (
     <div>
       {/* Image Banner */}
@@ -46,8 +58,17 @@ function HomeProducts() {
           </span>
         </div>
         <div className="absolute top-6 right-4  flex gap-2">
-          <span className="text-2xl bg-gray-50 p-3 sm:rounded-xl rounded-full">
-            <FaRegHeart />
+          <span
+            onClick={heartHandle}
+            className="text-2xl bg-gray-50 p-3 sm:rounded-xl rounded-full"
+          >
+            {clicked ? (
+              <span className="text-[24px]">
+                <FaHeart />
+              </span>
+            ) : (
+              <FaRegHeart />
+            )}
           </span>
           <span className="text-2xl bg-gray-50 p-3 sm:rounded-xl rounded-full sm:hidden">
             <FiSearch />
@@ -58,7 +79,7 @@ function HomeProducts() {
             KFC
           </h1>
           <div className="flex gap-2">
-            <div className="flex items-center bg-gray-200 rounded-xl sm:px-4 px-2 justify-center sm:gap-3 gap-1 sm:py-2">
+            <div className="flex items-center bg-gray-200 hover:bg-gray-50 duration-300 rounded-xl sm:px-4 px-2 justify-center sm:gap-3 gap-1 sm:py-2 cursor-pointer">
               <span className="text-3xl">
                 <GiPikeman />
               </span>
@@ -69,7 +90,7 @@ function HomeProducts() {
                 </h2>
               </div>
             </div>
-            <div className="flex items-center bg-gray-200 rounded-xl sm:px-4 px-2 justify-center gap-3 sm:py-2">
+            <div className="flex items-center bg-gray-200 hover:bg-gray-50 duration-300 rounded-xl sm:px-4 px-2 justify-center gap-3 sm:py-2 cursor-pointer">
               <span className="sm:text-2xl text-xl">
                 <RiStarFill />
               </span>
@@ -80,24 +101,57 @@ function HomeProducts() {
                 </h2>
               </div>
             </div>
-            {/* <div className="bg-gray-200 rounded-xl px-4 py-2 hidden sm:block">
-              <span className="text-3xl">
-                <GoInfo />
-              </span>
-            </div>
-            <div className="bg-gray-200 rounded-xl px-4 py-3 sm:hidden flex items-center justify-center text-center">
-              <span className="text-xl">
-                <BsThreeDots />
-              </span>
-            </div> */}
-            <div className="bg-gray-200 rounded-xl px-4 py-2 flex items-center justify-center">
-              <span className="text-3xl hidden sm:block">
-                <GoInfo />
-              </span>
-              <span className="text-xl sm:hidden flex">
-                <BsThreeDots />
-              </span>
-            </div>
+            <Popover
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+              placement="bottom"
+            >
+              <PopoverHandler>
+                <div className="bg-gray-200 hover:bg-gray-50 duration-300 cursor-pointer rounded-xl px-4 py-2 flex items-center justify-center">
+                  <span className="text-3xl hidden sm:block">
+                    <GoInfo />
+                  </span>
+                  <span className="text-xl sm:hidden flex">
+                    <BsThreeDots />
+                  </span>
+                </div>
+              </PopoverHandler>
+              <PopoverContent className="w-[425px] p-6 rounded-2xl">
+                <div className="pb-3">
+                  <Typography
+                    variant="h6"
+                    color="blue-gray"
+                    className="text-xl"
+                  >
+                    KFC
+                  </Typography>
+                  <div className="pt-2">
+                    <h2 className="font-semibold text-[16px]">
+                      Алматы, улица Розыбакиева, 247А
+                    </h2>
+                    <p className="text-[16px] text-gray-500">
+                      Business hours from 11:30
+                    </p>
+                  </div>
+                </div>
+                <div className="border-y-2 py-4">
+                  <p className="text-[16px] text-gray-500">Fast foodHalal₸₸</p>
+                </div>
+                <div className="pt-4">
+                  <p className="text-[16px] text-gray-500">
+                    Contractor (seller) ТОО «The Caspian International
+                    Restaurants Company (Каспиан Интернэшнл Рестронгз Компани)»,
+                    010000, г.Алматы, ул. Абиша Кекилбайулы, 34, БЦ Capital
+                    Tower (2 этаж), BIN 070440007370
+                  </p>
+                  <p className="text-[16px] pt-3 text-gray-500">
+                    Business hours: from 10:00 to 23:30
+                  </p>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
